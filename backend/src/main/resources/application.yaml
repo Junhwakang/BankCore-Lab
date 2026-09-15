@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: bankcore-lab
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/bankcore
+    username: bankcore
+    password: ${BANKCORE_DB_PASSWORD}
+    hikari:
+      connection-timeout: 3000
+      maximum-pool-size: 5
+server:
+  address: 127.0.0.1
+  port: 8080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+      show-components: never

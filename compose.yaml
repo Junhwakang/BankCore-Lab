@@ -1,0 +1,20 @@
+name: bankcore-lab
+services:
+  postgres:
+    image: postgres:18.6
+    environment:
+      POSTGRES_DB: bankcore
+      POSTGRES_USER: bankcore
+      POSTGRES_PASSWORD: ${BANKCORE_DB_PASSWORD:?Run node scripts/setup.mjs first}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bankcore -d bankcore"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+volumes:
+  postgres_data:
